@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Thiago Barradas</Authors>
+    <Product>Elasticsearch Easy Bulk and Search</Product>
+    <PackageProjectUrl>https://github.com/ThiagoBarradas/elasticsearch-bulkandsearch-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ThiagoBarradas/elasticsearch-bulkandsearch-dotnet</RepositoryUrl>
+    <PackageTags>elasticsearch, get, bulk, search, scroll, scrolling,easy, query, builder</PackageTags>
+    <Copyright>© 2019</Copyright>
+    <PackageLicenseUrl>https://github.com/ThiagoBarradas/elasticsearch-bulkandsearch-dotnet/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageIconUrl>https://i.imgur.com/lfWW74h.png</PackageIconUrl>
+    <Description>Elasticsearch Bulk and Search is a high level library to make easy basic query operations (get, search and scroll) and index operations (single index or bulk), besides paging, sorting and query buider.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NEST" Version="6.5.0" />
+    <PackageReference Include="NEST.JsonNetSerializer" Version="6.5.0" />
+  </ItemGroup>
+
+</Project>

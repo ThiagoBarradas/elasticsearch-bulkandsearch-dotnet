@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.BulkAndSearch.Demo", "Elasticsearch.BulkAndSearch.Demo\Elasticsearch.BulkAndSearch.Demo.csproj", "{1BF99781-2F90-4796-8728-FE5893E51286}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.BulkAndSearch", "Elasticsearch.BulkAndSearch\Elasticsearch.BulkAndSearch.csproj", "{2A45B0D8-B54A-4E52-80D8-E3F7E4B2B260}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.BulkAndSearch.Tests", "Elasticsearch.BulkAndSearch.Tests\Elasticsearch.BulkAndSearch.Tests.csproj", "{27C1C924-46F0-45C4-81E3-71C0A0D59CDF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C05D6070-566C-4602-98DC-64F7E492B641}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
+		.github\CONTRIBUTING.md = .github\CONTRIBUTING.md
+		.github\ISSUE_TEMPLATE.md = .github\ISSUE_TEMPLATE.md
+		LICENSE = LICENSE
+		.github\PULL_REQUEST_TEMPLATE.md = .github\PULL_REQUEST_TEMPLATE.md
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1BF99781-2F90-4796-8728-FE5893E51286}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BF99781-2F90-4796-8728-FE5893E51286}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BF99781-2F90-4796-8728-FE5893E51286}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BF99781-2F90-4796-8728-FE5893E51286}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A45B0D8-B54A-4E52-80D8-E3F7E4B2B260}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A45B0D8-B54A-4E52-80D8-E3F7E4B2B260}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A45B0D8-B54A-4E52-80D8-E3F7E4B2B260}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A45B0D8-B54A-4E52-80D8-E3F7E4B2B260}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27C1C924-46F0-45C4-81E3-71C0A0D59CDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27C1C924-46F0-45C4-81E3-71C0A0D59CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27C1C924-46F0-45C4-81E3-71C0A0D59CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27C1C924-46F0-45C4-81E3-71C0A0D59CDF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {37870761-E1C8-4A3D-99C4-49F3380988AC}
+	EndGlobalSection
+EndGlobal
