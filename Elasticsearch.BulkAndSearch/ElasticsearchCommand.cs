@@ -9,7 +9,7 @@ namespace Elasticsearch.BulkAndSearch
     {
         public ElasticsearchCommand(
             ElasticsearchOptions options, 
-            Func<string, T, string> generateIndexName = null)
+            Func<string, T, string> generateIndexName)
             : base(ConnectionMode.Write, options, generateIndexName)
         { }
 

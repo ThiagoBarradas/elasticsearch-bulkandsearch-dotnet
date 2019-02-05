@@ -13,7 +13,7 @@ namespace Elasticsearch.BulkAndSearch
 
         public Func<string, T, string> GenerateIndexName { get; protected set; }
 
-        public BaseElasticsearch(
+        protected BaseElasticsearch(
             ConnectionMode mode,
             ElasticsearchOptions options, 
             Func<string, T, string> generateIndexName)

@@ -12,8 +12,8 @@ namespace Elasticsearch.BulkAndSearch.Tests
         {
             // arrage
             var options = ElasticClientMock.GetOptions();
-            var command = new ElasticsearchCommand<Person>(options);
-            command.ElasticClient = ElasticClientMock.GetElasticClientMock(options, null);
+            var command = new ElasticsearchCommand<Person>(options, null);
+            command.ElasticClient = ElasticClientMock.GetElasticClientMock(options, null, null, null);
             var person = new Person { Id = "1", Name = "Thiago Barradas", Age = 27, CreateDate = new DateTime(2019, 01, 01) };
 
             // act
@@ -33,7 +33,7 @@ namespace Elasticsearch.BulkAndSearch.Tests
             // arrage
             var options = ElasticClientMock.GetOptions();
             var command = new ElasticsearchCommand<Person>(options, Person.GenerateIndexName);
-            command.ElasticClient = ElasticClientMock.GetElasticClientMock(options, Person.GenerateIndexName);
+            command.ElasticClient = ElasticClientMock.GetElasticClientMock(options, Person.GenerateIndexName, null, null);
             var person = new Person { Id = "1", Name = "Thiago Barradas", Age = 27, CreateDate = new DateTime(2019, 01, 01) };
 
             // act
@@ -52,8 +52,8 @@ namespace Elasticsearch.BulkAndSearch.Tests
         {
             // arrage
             var options = ElasticClientMock.GetOptions();
-            var command = new ElasticsearchCommand<Person>(options);
-            command.ElasticClient = ElasticClientMock.GetElasticClientMock(options, null);
+            var command = new ElasticsearchCommand<Person>(options, null);
+            command.ElasticClient = ElasticClientMock.GetElasticClientMock(options, null, null, null);
             var persons = new List<Person>
             {
                 { new Person { Id = "1", Name = "Thiago Barradas", Age = 27, CreateDate = new DateTime(2019, 01, 01) } },
@@ -80,7 +80,7 @@ namespace Elasticsearch.BulkAndSearch.Tests
             // arrage
             var options = ElasticClientMock.GetOptions();
             var command = new ElasticsearchCommand<Person>(options, Person.GenerateIndexName);
-            command.ElasticClient = ElasticClientMock.GetElasticClientMock(options, Person.GenerateIndexName);
+            command.ElasticClient = ElasticClientMock.GetElasticClientMock(options, Person.GenerateIndexName, null, null);
 
             var persons = new List<Person>
             {

@@ -15,7 +15,7 @@ namespace Elasticsearch.BulkAndSearch.Tests
             // arrage
             var options = ElasticClientMock.GetOptions();
             var query = new ElasticsearchQuery<Person>(options);
-            query.ElasticClient = ElasticClientMock.GetElasticClientMock(options, null, null);
+            query.ElasticClient = ElasticClientMock.GetElasticClientMock(options, null, null, null);
 
             // act
             var result = query.Get("some-id");
@@ -32,7 +32,7 @@ namespace Elasticsearch.BulkAndSearch.Tests
             var options = ElasticClientMock.GetOptions();
             var query = new ElasticsearchQuery<Person>(options);
             var person = new Person { Id = "1", Name = "Thiago Barradas", Age = 27, CreateDate = new DateTime(2019, 01, 01) };
-            query.ElasticClient = ElasticClientMock.GetElasticClientMock(options, null, person);
+            query.ElasticClient = ElasticClientMock.GetElasticClientMock(options, null, person, null);
 
             // act
             var result = query.Get("some-id");
@@ -52,7 +52,7 @@ namespace Elasticsearch.BulkAndSearch.Tests
             var query = new ElasticsearchQuery<Person>(options);
             var searchOptions = new SearchOptions { Page = 1, Size = 1 };
             var queryToFilter = Query<Person>.Match(i => i.Field("name").Query("Ralph Barradas"));
-            query.ElasticClient = ElasticClientMock.GetElasticClientMock(options, null, null);
+            query.ElasticClient = ElasticClientMock.GetElasticClientMock(options, null, null, null);
 
             // act
             var result = query.Search(queryToFilter, searchOptions);
@@ -73,7 +73,7 @@ namespace Elasticsearch.BulkAndSearch.Tests
             var person = new Person { Id = "1", Name = "Thiago Barradas", Age = 27, CreateDate = new DateTime(2019, 01, 01) };
             var searchOptions = new SearchOptions { Page = 1, Size = 1 };
             var queryToFilter = Query<Person>.Match(i => i.Field("name").Query("Thiago Barradas"));
-            query.ElasticClient = ElasticClientMock.GetElasticClientMock(options, null, person);
+            query.ElasticClient = ElasticClientMock.GetElasticClientMock(options, null, person, null);
             
             // act
             var result = query.Search(queryToFilter, searchOptions);
@@ -96,7 +96,7 @@ namespace Elasticsearch.BulkAndSearch.Tests
             var query = new ElasticsearchQuery<Person>(options);
             var scrollOptions = new ScrollOptions { Scroll = "10m", Size = 1 };
             var queryToFilter = Query<Person>.Match(i => i.Field("name").Query("Ralph Barradas"));
-            query.ElasticClient = ElasticClientMock.GetElasticClientMock(options, null, null);
+            query.ElasticClient = ElasticClientMock.GetElasticClientMock(options, null, null, null);
 
             // act
             var result = query.Scroll(queryToFilter, scrollOptions);

@@ -23,7 +23,7 @@ namespace Elasticsearch.BulkAndSearch.Factories
             var jsonConverter = new JsonConverter[] { new StringEnumConverter() };
             var connectionPool = new SingleNodeConnectionPool(new Uri(uri));
 
-            var headersCollection = new NameValueCollection()
+            var headersCollection = new NameValueCollection
             {
                 { nameof(options.Environment), options.Environment }
             };

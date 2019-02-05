@@ -23,23 +23,23 @@ namespace Elasticsearch.BulkAndSearch.Tests.TestUtilities
             };
         }
 
-        public static string LastElasticClientAction = null;
+        public static string LastElasticClientAction { get; set; }
 
-        public static Person LastProcessedPerson = null;
+        public static Person LastProcessedPerson { get; set; }
 
-        public static string LastProcessedIndex = null;
+        public static string LastProcessedIndex { get; set; }
 
-        public static List<Person> LastProcessedPersons = null;
+        public static List<Person> LastProcessedPersons { get; set; }
 
-        public static List<string> LastProcessedIndexes = null;
+        public static List<string> LastProcessedIndexes { get; set; }
 
-        public static string LastQueryBody = null;
+        public static string LastQueryBody { get; set; }
 
         public static IElasticClient GetElasticClientMock(
             ElasticsearchOptions options, 
             Func<string, Person, string> generateIndexName, 
-            Person returnedPerson = null, 
-            string scrollId = null)
+            Person returnedPerson, 
+            string scrollId)
         {
             var searchMock = new Mock<ISearchResponse<Person>>();
 
