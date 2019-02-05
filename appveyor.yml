@@ -34,8 +34,8 @@ after_test:
 artifacts:
   - path: Elasticsearch.BulkAndSearch\bin\Release\netstandard2.0\Elasticsearch.BulkAndSearch.dll
     name: Elasticsearch.BulkAndSearch.dll
-  - path: Elasticsearch.BulkAndSearch\bin\Release\Elasticsearch.BulkAndSearch.%version%.nupkg
-    name: Elasticsearch.BulkAndSearch.%version%.nupkg
+  - path: Elasticsearch.BulkAndSearch\bin\Release\Easy.Elasticsearch.BulkAndSearch.%version%.nupkg
+    name: Easy.Elasticsearch.BulkAndSearch.%version%.nupkg
 
 deploy:
   provider: NuGet

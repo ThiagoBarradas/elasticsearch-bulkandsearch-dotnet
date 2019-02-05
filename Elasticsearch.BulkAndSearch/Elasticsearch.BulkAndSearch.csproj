@@ -11,6 +11,7 @@
     <PackageLicenseUrl>https://github.com/ThiagoBarradas/elasticsearch-bulkandsearch-dotnet/blob/master/LICENSE</PackageLicenseUrl>
     <PackageIconUrl>https://i.imgur.com/lfWW74h.png</PackageIconUrl>
     <Description>Elasticsearch Bulk and Search is a high level library to make easy basic query operations (get, search and scroll) and index operations (single index or bulk), besides paging, sorting and query buider.</Description>
+    <PackageId>Easy.Elasticsearch.BulkAndSearch</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
