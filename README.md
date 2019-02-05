@@ -116,7 +116,7 @@ When some error occurred, an exception is thrown;
 ## Install via NuGet
 
 ```
-PM> Install-Package Elasticsearch.BulkAndSearch
+PM> Install-Package Easy.Elasticsearch.BulkAndSearch
 ```
 
 ## How can I contribute?
