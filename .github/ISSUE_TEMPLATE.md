@@ -1,4 +1,4 @@
-```
+```markdown
 Please use the following template to submit your issue. 
 Following this template will allow us to quickly investigate and help you with your issue. 
 Please be aware that issues which do not conform to this template may be closed. 
@@ -14,14 +14,14 @@ BUG REPORT / TASK
 
 Add checklist if this is a task
 
-- [x] Add slack integration
-- [_] Support xyz 
+  - [x] Add slack integration
+  - [_] Support xyz 
 
 ### Steps
 
-1. First step
-2. Second step
-3. Third step
+ 1. First step
+ 2. Second step
+ 3. Third step
 
 ### Expected behaviour
 
@@ -37,7 +37,6 @@ You may write here the specifications like the version of the project, services,
 
 ### Logs / Stack trace
 
-```
+```markdown
 Insert your log/stack trace here
 ```
-
