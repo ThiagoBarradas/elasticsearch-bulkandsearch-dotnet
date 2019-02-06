@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Elasticsearch.BulkAndSearch.Demo
 {
-    class Program
+    static class Program
     {
         static IElasticsearchCommand<Person> PersonCommand { get; set; }
 
@@ -31,6 +31,7 @@ namespace Elasticsearch.BulkAndSearch.Demo
             PersonQuery = new ElasticsearchQuery<Person>(elasticsearchOptions);
 
             // bulk
+            Console.Write("Bulk:");
             var persons = new List<Person>
             {
                 { new Person { Id = "1", Name = "Thiago Barradas", Age = 27, CreateDate = new DateTime(2019, 01, 01) } },
@@ -40,18 +41,26 @@ namespace Elasticsearch.BulkAndSearch.Demo
                 { new Person { Id = "11", Name = "Jow Troll Moon Do", Age = 58, CreateDate = new DateTime(2018, 05, 25) } }
             };
 
+            persons.ForEach(person => Console.WriteLine(person.Name));
             PersonCommand.Bulk(persons);
 
             // upsert
+            Console.WriteLine("Upsert:");
             var otherPerson = new Person { Id = "2", Name = "Rafael Barradas", Age = 25, CreateDate = new DateTime(2018, 12, 01) };
 
+            Console.WriteLine(otherPerson.Name);
             PersonCommand.Upsert(otherPerson);
 
             // get by id 
+            Console.WriteLine("Get:");
             Person personX = PersonQuery.Get("8"); // null
             Person personY = PersonQuery.Get("4"); // John Doe
 
+            Console.WriteLine(personX?.Name);
+            Console.WriteLine(personY?.Name);
+
             // search 
+            Console.WriteLine("Search:");
             var searchOptions = new SearchOptions
             {
                 Page = 1,
@@ -63,8 +72,10 @@ namespace Elasticsearch.BulkAndSearch.Demo
             var query = Query<Person>.DateRange(i => i.Field("createDate").LessThan("2018-12-01"));
 
             var searchResult = PersonQuery.Search(query, searchOptions);
+            searchResult.Items.ToList().ForEach(person => Console.WriteLine(person.Name));
 
             // scroll
+            Console.WriteLine("Scroll:");
             var scrollOptions = new ScrollOptions
             {
                 Scroll = "1m",
@@ -82,6 +93,8 @@ namespace Elasticsearch.BulkAndSearch.Demo
 
                 scrollResult = PersonQuery.Scroll(query, scrollOptions);
             }
+
+            scrollPersons.ForEach(person => Console.WriteLine(person.Name));
         }
     }
 }
