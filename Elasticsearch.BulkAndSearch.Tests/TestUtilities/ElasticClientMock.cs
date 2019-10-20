@@ -41,6 +41,9 @@ namespace Elasticsearch.BulkAndSearch.Tests.TestUtilities
             Person returnedPerson, 
             string scrollId)
         {
+            var getMock = new Mock<IGetResponse<Person>>();
+            getMock.SetupGet(m => m.Source).Returns(returnedPerson);
+
             var searchMock = new Mock<ISearchResponse<Person>>();
 
             var persons = new List<Person>();
@@ -121,6 +124,13 @@ namespace Elasticsearch.BulkAndSearch.Tests.TestUtilities
                   LastElasticClientAction = "Search";
                   LastQueryBody = SerializeUtil.Serialize(request);
                   return searchMock.Object;
+              });
+
+            clientMock
+              .Setup(m => m.Get<Person>(It.IsAny<DocumentPath<Person>>(), null))
+              .Returns(() => {
+                  LastElasticClientAction = "Get";
+                  return getMock.Object;
               });
 
 

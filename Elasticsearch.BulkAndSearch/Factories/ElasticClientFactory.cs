@@ -3,7 +3,7 @@ using Elasticsearch.Net;
 using Nest;
 using Nest.JsonNetSerializer;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using PackUtils;
 using System;
 using System.Collections.Specialized;
 
@@ -11,6 +11,8 @@ namespace Elasticsearch.BulkAndSearch.Factories
 {
     public static class ElasticClientFactory
     {
+        public static JsonSerializerSettings JsonSerializerSettings = JsonUtility.SnakeCaseJsonSerializerSettings;
+        
         public static IElasticClient GetInstance(ConnectionMode mode, ElasticsearchOptions options)
         {
             if (options == null)
@@ -19,10 +21,7 @@ namespace Elasticsearch.BulkAndSearch.Factories
             }
 
             var uri = (mode == ConnectionMode.Write) ? options.WriteUrl : options.ReadUrl;
-
-            var jsonConverter = new JsonConverter[] { new StringEnumConverter() };
             var connectionPool = new SingleNodeConnectionPool(new Uri(uri));
-
             var headersCollection = new NameValueCollection
             {
                 { nameof(options.Environment), options.Environment }
@@ -33,14 +32,22 @@ namespace Elasticsearch.BulkAndSearch.Factories
                 (elasticsearchSerializer, connSettings) => new JsonNetSerializer(
                     elasticsearchSerializer,
                     connSettings,
-                    contractJsonConverters: jsonConverter))
-                .DefaultIndex(options.DefaultIndexName)
-                .DefaultTypeName(options.DefaultTypeName)
+                    jsonSerializerSettingsFactory: () => { return JsonSerializerSettings; }))
                 .RequestTimeout(TimeSpan.FromSeconds(options.TimeoutInSeconds))
                 .MaximumRetries(options.MaximumRetries)
                 .GlobalHeaders(headersCollection)
                 .ThrowExceptions();
-            
+
+            if (!string.IsNullOrWhiteSpace(options.DefaultIndexName))
+            {
+                connectionSettings.DefaultIndex(options.DefaultIndexName);
+            }
+
+            if (!string.IsNullOrWhiteSpace(options.DefaultTypeName))
+            {
+                connectionSettings.DefaultTypeName(options.DefaultTypeName);
+            }
+
             return new ElasticClient(connectionSettings);
         }
     }

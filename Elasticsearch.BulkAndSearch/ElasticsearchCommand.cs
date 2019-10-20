@@ -5,31 +5,33 @@ using System.Collections.Generic;
 
 namespace Elasticsearch.BulkAndSearch
 {
-    public class ElasticsearchCommand<T> : BaseElasticsearch<T>, IElasticsearchCommand<T> where T : class
+    public class ElasticsearchCommand<TEntity> : BaseElasticsearch<TEntity>, IElasticsearchCommand<TEntity> where TEntity : class
     {
         public ElasticsearchCommand(
             ElasticsearchOptions options, 
-            Func<string, T, string> generateIndexName)
+            Func<string, TEntity, string> generateIndexName)
             : base(ConnectionMode.Write, options, generateIndexName)
         { }
 
-        public bool Bulk(IEnumerable<T> documents)
+        public IBulkResponse Bulk(IEnumerable<TEntity> documents, string type = null)
         {
             BulkDescriptor descriptor = new BulkDescriptor();
             foreach (var document in documents)
             {
-                descriptor.Index<T>(i => i
+                descriptor.Index<TEntity>(i => i
                     .Index(this.GetIndexName(document))
+                    .Type(type ?? this.Options.DefaultTypeName)
                     .Document(document));
             }
-            
-            return this.ElasticClient.Bulk(descriptor).IsValid;
+
+            return this.ElasticClient.Bulk(descriptor);
         }
 
-        public bool Upsert(T document)
+        public bool Upsert(TEntity document, string type = null)
         {
             var index = this.GetIndexName(document);
-            return this.ElasticClient.Index(document, i => i.Index(index)).IsValid;
+            return this.ElasticClient.Index(document, i => 
+                i.Index(index).Type(type ?? this.Options.DefaultTypeName)).IsValid;
         }
     }
 }

@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Nest;
+using System.Collections.Generic;
 
 namespace Elasticsearch.BulkAndSearch
 {
-    public interface IElasticsearchCommand<T> where T : class
+    public interface IElasticsearchCommand<TEntity> where TEntity : class
     {
-        bool Upsert(T document);
+        bool Upsert(TEntity document, string type = null);
 
-        bool Bulk(IEnumerable<T> documents);
+        IBulkResponse Bulk(IEnumerable<TEntity> documents, string type = null);
     }
 }

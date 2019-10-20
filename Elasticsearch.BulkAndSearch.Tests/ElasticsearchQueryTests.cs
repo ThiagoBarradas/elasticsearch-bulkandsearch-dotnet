@@ -22,7 +22,7 @@ namespace Elasticsearch.BulkAndSearch.Tests
 
             // assert
             Assert.Null(result);
-            Assert.Equal("Search", ElasticClientMock.LastElasticClientAction);
+            Assert.Equal("Get", ElasticClientMock.LastElasticClientAction);
         }
 
         [Fact]
@@ -41,7 +41,7 @@ namespace Elasticsearch.BulkAndSearch.Tests
             Assert.NotNull(result);
             Assert.Equal("1", result.Id);
             Assert.Equal("Thiago Barradas", result.Name);
-            Assert.Equal("Search", ElasticClientMock.LastElasticClientAction);
+            Assert.Equal("Get", ElasticClientMock.LastElasticClientAction);
         }
 
         [Fact]

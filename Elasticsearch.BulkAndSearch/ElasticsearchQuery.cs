@@ -1,72 +1,68 @@
 ﻿using Elasticsearch.BulkAndSearch.Helpers;
 using Elasticsearch.BulkAndSearch.Models;
 using Nest;
-using System.Linq;
 
 namespace Elasticsearch.BulkAndSearch
 {
-    public class ElasticsearchQuery<T> : BaseElasticsearch<T>, IElasticsearchQuery<T> where T : class
+    public class ElasticsearchQuery<TEntity> : BaseElasticsearch<TEntity>, IElasticsearchQuery<TEntity> where TEntity : class
     {
         public ElasticsearchQuery(
             ElasticsearchOptions options)
             : base(ConnectionMode.Read, options, null)
         { }
 
-        public T Get(object id)
+        public TEntity Get(object id, string index = null, string type = null)
         {
-            var options = new SearchOptions { Size = 1, Page = 1 };
-            var query = new TermQuery
-            {
-                Field = "_id",
-                Value = id
-            };
+            DocumentPath<TEntity> path = new DocumentPath<TEntity>(id.ToString())
+                .Type(type ?? this.Options.DefaultTypeName)
+                .Index(index ?? this.Options.DefaultIndexName);
 
-            return this.Search(query, options).Items.FirstOrDefault();
+            return this.ElasticClient.Get(path).Source;
         }
 
-        public SearchResult<T> Search(QueryContainer query, SearchOptions searchOptions)
+        public SearchResult<TEntity> Search(QueryContainer query, SearchOptions searchOptions, string index = null, string type = null)
         {
-            SearchDescriptor<T> descriptor = new SearchDescriptor<T>();
+            SearchDescriptor<TEntity> descriptor = new SearchDescriptor<TEntity>();
 
-            descriptor.Index($"{this.Options.DefaultIndexName}*")
-                      .Type(this.Options.DefaultTypeName)
+            descriptor.Index(index ?? $"{this.Options.DefaultIndexName}*")
+                      .Type(type ?? this.Options.DefaultTypeName)
                       .AddQuery(query)
                       .AddPaging(searchOptions)
                       .AddSorting(searchOptions);
 
-            var elasticResponse = this.ElasticClient.Search<T>(descriptor);
+            var elasticResponse = this.ElasticClient.Search<TEntity>(descriptor);
             
-            return new SearchResult<T>
+            return new SearchResult<TEntity>
             {
                 Total = elasticResponse.Total,
                 Items = elasticResponse.Documents
             };
         }
 
-        public ScrollResult<T> Scroll(QueryContainer query, ScrollOptions scrollOptions)
+        public ScrollResult<TEntity> Scroll(QueryContainer query, ScrollOptions scrollOptions, string index = null, string type = null)
         {
-            ISearchResponse<T> elasticResponse = null;
+            ISearchResponse<TEntity> elasticResponse = null;
 
             if (!string.IsNullOrWhiteSpace(scrollOptions.ScrollId))
             {
                 ScrollRequest scrollRequest = new ScrollRequest(scrollOptions.ScrollId, scrollOptions.Scroll);
-                elasticResponse = this.ElasticClient.Scroll<T>(scrollRequest);
+                elasticResponse = this.ElasticClient.Scroll<TEntity>(scrollRequest);
             }
             else
             {
-                SearchDescriptor<T> descriptor = new SearchDescriptor<T>();
+                SearchDescriptor<TEntity> descriptor = new SearchDescriptor<TEntity>();
 
-                descriptor.Index($"{this.Options.DefaultIndexName}*")
+                descriptor.Index(index ?? $"{this.Options.DefaultIndexName}*")
                           .Type(this.Options.DefaultTypeName)
                           .AddQuery(query)
                           .AddScroll(scrollOptions)
                           .AddSorting(scrollOptions);
 
-                elasticResponse = this.ElasticClient.Search<T>(descriptor);
+                elasticResponse = this.ElasticClient.Search<TEntity>(descriptor);
                 scrollOptions.ScrollId = elasticResponse.ScrollId;
             }
 
-            return new ScrollResult<T>
+            return new ScrollResult<TEntity>
             {
                 Total = elasticResponse.Total,
                 Items = elasticResponse.Documents,
