@@ -3,6 +3,7 @@ using Elasticsearch.Net;
 using Nest;
 using Nest.JsonNetSerializer;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using PackUtils;
 using System;
 using System.Collections.Specialized;
@@ -12,7 +13,9 @@ namespace Elasticsearch.BulkAndSearch.Factories
     public static class ElasticClientFactory
     {
         public static JsonSerializerSettings JsonSerializerSettings = JsonUtility.SnakeCaseJsonSerializerSettings;
-        
+
+        public static NamingStrategy NamingStrategy = new SnakeCaseNamingStrategy();
+
         public static IElasticClient GetInstance(ConnectionMode mode, ElasticsearchOptions options)
         {
             if (options == null)
@@ -31,8 +34,9 @@ namespace Elasticsearch.BulkAndSearch.Factories
                 connectionPool,
                 (elasticsearchSerializer, connSettings) => new JsonNetSerializer(
                     elasticsearchSerializer,
-                    connSettings,
-                    jsonSerializerSettingsFactory: () => { return JsonSerializerSettings; }))
+                    connSettings, 
+                    () => JsonSerializerSettings,
+                    resolver => resolver.NamingStrategy = NamingStrategy))
                 .RequestTimeout(TimeSpan.FromSeconds(options.TimeoutInSeconds))
                 .MaximumRetries(options.MaximumRetries)
                 .GlobalHeaders(headersCollection)
