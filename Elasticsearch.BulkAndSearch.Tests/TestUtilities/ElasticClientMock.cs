@@ -68,15 +68,15 @@ namespace Elasticsearch.BulkAndSearch.Tests.TestUtilities
             var clientMock = new Mock<IElasticClient>();
 
             clientMock
-                .Setup(m => m.Index<Person>(
-                    It.IsAny<Person>(),
-                    It.IsAny<Func<IndexDescriptor<Person>, IIndexRequest<Person>>>()))
-                .Returns((Person document, Func<IndexDescriptor<Person>, IIndexRequest<Person>> selector) =>
+                .Setup(m => m.Index(
+                    It.IsAny<object>(),
+                    It.IsAny<Func<IndexDescriptor<object>, IIndexRequest<object>>>()))
+                .Returns((object document, Func<IndexDescriptor<object>, IIndexRequest<object>> selector) =>
                 {
                     LastElasticClientAction = "Index";
-                    LastProcessedPerson = document;
+                    LastProcessedPerson = (Person) document;
                     LastProcessedIndex =
-                        generateIndexName?.Invoke(options.DefaultIndexName, document)
+                        generateIndexName?.Invoke(options.DefaultIndexName, (Person) document)
                         ?? options.DefaultIndexName;
                     return responseMock.Object;
                 });

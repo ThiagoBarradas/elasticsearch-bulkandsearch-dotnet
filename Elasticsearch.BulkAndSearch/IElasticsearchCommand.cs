@@ -1,5 +1,4 @@
-﻿using Nest;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Elasticsearch.BulkAndSearch
 {
@@ -7,6 +6,6 @@ namespace Elasticsearch.BulkAndSearch
     {
         bool Upsert(TEntity document, string type = null);
 
-        IBulkResponse Bulk(IEnumerable<TEntity> documents, string type = null);
+        bool Bulk(IEnumerable<TEntity> documents, string type = null);
     }
 }
