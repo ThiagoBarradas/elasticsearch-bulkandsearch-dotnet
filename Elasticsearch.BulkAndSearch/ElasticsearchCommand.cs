@@ -28,10 +28,9 @@ namespace Elasticsearch.BulkAndSearch
             return this.ElasticClient.Bulk(descriptor).IsValid;
         }
 
-        public bool Upsert(TEntity document, string type = null, bool forceRefresh = false)
+        public bool Upsert(TEntity document, string type = null, Refresh refresh = Refresh.False)
         {
             var index = this.GetIndexName(document);
-            var refresh = (forceRefresh) ? Refresh.True : Refresh.False;
             return this.ElasticClient.Index((object) document, i => 
                 i.Index(index).Type(type ?? this.Options.DefaultTypeName).Refresh(refresh)).IsValid;
         }
