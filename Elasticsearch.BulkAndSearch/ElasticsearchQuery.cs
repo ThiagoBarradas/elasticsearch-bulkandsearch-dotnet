@@ -17,7 +17,7 @@ namespace Elasticsearch.BulkAndSearch
                 .Type(type ?? this.Options.DefaultTypeName)
                 .Index(index ?? this.Options.DefaultIndexName);
 
-            return this.ElasticClient.Get(path).Source;
+            return this.ElasticClient.Get(path)?.Source;
         }
 
         public SearchResult<TEntity> Search(QueryContainer query, SearchOptions searchOptions, string index = null, string type = null)
