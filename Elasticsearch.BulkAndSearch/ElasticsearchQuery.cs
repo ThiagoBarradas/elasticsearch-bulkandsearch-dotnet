@@ -1,6 +1,7 @@
 ﻿using Elasticsearch.BulkAndSearch.Helpers;
 using Elasticsearch.BulkAndSearch.Models;
 using Nest;
+using System;
 
 namespace Elasticsearch.BulkAndSearch
 {
@@ -13,11 +14,18 @@ namespace Elasticsearch.BulkAndSearch
 
         public TEntity Get(object id, string index = null, string type = null)
         {
-            DocumentPath<TEntity> path = new DocumentPath<TEntity>(id.ToString())
-                .Type(type ?? this.Options.DefaultTypeName)
-                .Index(index ?? this.Options.DefaultIndexName);
+            try
+            {
+                DocumentPath<TEntity> path = new DocumentPath<TEntity>(id.ToString())
+                    .Type(type ?? this.Options.DefaultTypeName)
+                    .Index(index ?? this.Options.DefaultIndexName);
 
-            return this.ElasticClient.Get(path)?.Source;
+                return this.ElasticClient.Get(path)?.Source;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public SearchResult<TEntity> Search(QueryContainer query, SearchOptions searchOptions, string index = null, string type = null)
@@ -28,7 +36,10 @@ namespace Elasticsearch.BulkAndSearch
                       .Type(type ?? this.Options.DefaultTypeName)
                       .AddQuery(query)
                       .AddPaging(searchOptions)
-                      .AddSorting(searchOptions);
+                      .AddSorting(searchOptions)
+                      .IgnoreUnavailable(true)
+                      .AllowNoIndices(true)
+                      .AllowPartialSearchResults(true);
 
             var elasticResponse = this.ElasticClient.Search<TEntity>(descriptor);
             
@@ -56,7 +67,10 @@ namespace Elasticsearch.BulkAndSearch
                           .Type(this.Options.DefaultTypeName)
                           .AddQuery(query)
                           .AddScroll(scrollOptions)
-                          .AddSorting(scrollOptions);
+                          .AddSorting(scrollOptions)
+                          .IgnoreUnavailable(true)
+                          .AllowNoIndices(true)
+                          .AllowPartialSearchResults(true);
 
                 elasticResponse = this.ElasticClient.Search<TEntity>(descriptor);
                 scrollOptions.ScrollId = elasticResponse.ScrollId;
