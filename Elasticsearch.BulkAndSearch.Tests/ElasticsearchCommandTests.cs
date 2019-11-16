@@ -64,7 +64,7 @@ namespace Elasticsearch.BulkAndSearch.Tests
             var result = command.Bulk(persons);
 
             // assert
-            Assert.True(result);
+            Assert.True(result.IsValid);
             Assert.Equal("Bulk", ElasticClientMock.LastElasticClientAction);
             Assert.Equal(options.DefaultIndexName, ElasticClientMock.LastProcessedIndexes[0]);
             Assert.Equal(options.DefaultIndexName, ElasticClientMock.LastProcessedIndexes[1]);
@@ -92,7 +92,7 @@ namespace Elasticsearch.BulkAndSearch.Tests
             var result = command.Bulk(persons);
 
             // assert
-            Assert.True(result);
+            Assert.True(result.IsValid);
             Assert.Equal("Bulk", ElasticClientMock.LastElasticClientAction);
             Assert.Equal(options.DefaultIndexName+"-2019-01", ElasticClientMock.LastProcessedIndexes[0]);
             Assert.Equal(options.DefaultIndexName+"-2018-12", ElasticClientMock.LastProcessedIndexes[1]);
