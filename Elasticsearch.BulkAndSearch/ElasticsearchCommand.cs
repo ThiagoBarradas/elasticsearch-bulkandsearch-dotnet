@@ -14,7 +14,7 @@ namespace Elasticsearch.BulkAndSearch
             : base(ConnectionMode.Write, options, generateIndexName)
         { }
 
-        public bool Bulk(IEnumerable<TEntity> documents, string type = null)
+        public IBulkResponse Bulk(IEnumerable<TEntity> documents, string type = null)
         {
             BulkDescriptor descriptor = new BulkDescriptor();
             foreach (var document in documents)
@@ -25,7 +25,7 @@ namespace Elasticsearch.BulkAndSearch
                     .Document(document));
             }
 
-            return this.ElasticClient.Bulk(descriptor).IsValid;
+            return this.ElasticClient.Bulk(descriptor);
         }
 
         public bool Upsert(TEntity document, string type = null, Refresh refresh = Refresh.False)
