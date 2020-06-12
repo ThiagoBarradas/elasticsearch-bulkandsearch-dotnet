@@ -2,7 +2,7 @@
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Easy.Elasticsearch.BulkAndSearch.svg)](https://www.nuget.org/packages/Easy.Elasticsearch.BulkAndSearch/)
 [![NuGet Version](https://img.shields.io/nuget/v/Easy.Elasticsearch.BulkAndSearch.svg)](https://www.nuget.org/packages/Easy.Elasticsearch.BulkAndSearch/)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ThiagoBarradas_elasticsearch-bulkandsearch&metric=alert_status)](https://sonarcloud.io/dashboard?id=ThiagoBarradas_elasticsearch-bulkandsearch)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ThiagoBarradas_elasticsearch-bulkandsearch&metric=coverage)](https://sonarcloud.io/dashboard?id=ThiagoBarradas_elasticsearch-bulkandsearch)
+<!-- [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ThiagoBarradas_elasticsearch-bulkandsearch&metric=coverage)](https://sonarcloud.io/dashboard?id=ThiagoBarradas_elasticsearch-bulkandsearch) -->
 
 # Elasticsearch Bulk and Search!
 
