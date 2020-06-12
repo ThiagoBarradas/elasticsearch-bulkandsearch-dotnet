@@ -1,8 +1,8 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f061fb001de84b57bc382a82e47d7a5e)](https://www.codacy.com/app/ThiagoBarradas/elasticsearch-bulkandsearch-dotnet?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ThiagoBarradas/elasticsearch-bulkandsearch-dotnet&amp;utm_campaign=Badge_Grade)
-[![Build status](https://ci.appveyor.com/api/projects/status/qtmo4o5llnb9o8of/branch/master?svg=true)](https://ci.appveyor.com/project/ThiagoBarradas/elasticsearch-bulkandsearch-dotnet/branch/master)
-[![codecov](https://codecov.io/gh/ThiagoBarradas/elasticsearch-bulkandsearch-dotnet/branch/master/graph/badge.svg)](https://codecov.io/gh/ThiagoBarradas/elasticsearch-bulkandsearch-dotnet)
+
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Easy.Elasticsearch.BulkAndSearch.svg)](https://www.nuget.org/packages/Easy.Elasticsearch.BulkAndSearch/)
 [![NuGet Version](https://img.shields.io/nuget/v/Easy.Elasticsearch.BulkAndSearch.svg)](https://www.nuget.org/packages/Easy.Elasticsearch.BulkAndSearch/)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ThiagoBarradas_elasticsearch-bulkandsearch&metric=alert_status)](https://sonarcloud.io/dashboard?id=ThiagoBarradas_elasticsearch-bulkandsearch)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ThiagoBarradas_elasticsearch-bulkandsearch&metric=coverage)](https://sonarcloud.io/dashboard?id=ThiagoBarradas_elasticsearch-bulkandsearch)
 
 # Elasticsearch Bulk and Search!
 
