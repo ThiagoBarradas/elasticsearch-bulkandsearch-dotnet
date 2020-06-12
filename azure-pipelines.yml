@@ -11,7 +11,7 @@ variables:
   sdk_project_name: 'Easy.Elasticsearch.BulkAndSearch'
   sdk_project_path: 'Elasticsearch.BulkAndSearch/Elasticsearch.BulkAndSearch.csproj'
   net_version: 'netstandard2.0'
-  execute_test: 'true'
+  execute_test: 'false'
   test_project_base_folder: 'Elasticsearch.BulkAndSearch.Tests'
   test_project_path: 'Elasticsearch.BulkAndSearch.Tests/Elasticsearch.BulkAndSearch.Tests.csproj'
   execute_sonarcloud: 'true'
