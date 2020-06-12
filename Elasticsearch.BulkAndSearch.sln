@@ -1,24 +1,34 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.271
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.BulkAndSearch.Demo", "Elasticsearch.BulkAndSearch.Demo\Elasticsearch.BulkAndSearch.Demo.csproj", "{1BF99781-2F90-4796-8728-FE5893E51286}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elasticsearch.BulkAndSearch.Demo", "Elasticsearch.BulkAndSearch.Demo\Elasticsearch.BulkAndSearch.Demo.csproj", "{1BF99781-2F90-4796-8728-FE5893E51286}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.BulkAndSearch", "Elasticsearch.BulkAndSearch\Elasticsearch.BulkAndSearch.csproj", "{2A45B0D8-B54A-4E52-80D8-E3F7E4B2B260}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elasticsearch.BulkAndSearch", "Elasticsearch.BulkAndSearch\Elasticsearch.BulkAndSearch.csproj", "{2A45B0D8-B54A-4E52-80D8-E3F7E4B2B260}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.BulkAndSearch.Tests", "Elasticsearch.BulkAndSearch.Tests\Elasticsearch.BulkAndSearch.Tests.csproj", "{27C1C924-46F0-45C4-81E3-71C0A0D59CDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elasticsearch.BulkAndSearch.Tests", "Elasticsearch.BulkAndSearch.Tests\Elasticsearch.BulkAndSearch.Tests.csproj", "{27C1C924-46F0-45C4-81E3-71C0A0D59CDF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C05D6070-566C-4602-98DC-64F7E492B641}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{707375C5-6E16-41F1-A3AE-E7D8B05D35AC}"
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
-		appveyor.yml = appveyor.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{FEBCB6DE-B66F-42F3-9937-A3D848A3DEAF}"
+	ProjectSection(SolutionItems) = preProject
 		.github\CONTRIBUTING.md = .github\CONTRIBUTING.md
 		.github\ISSUE_TEMPLATE.md = .github\ISSUE_TEMPLATE.md
 		LICENSE = LICENSE
 		.github\PULL_REQUEST_TEMPLATE.md = .github\PULL_REQUEST_TEMPLATE.md
 		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "devops", "devops", "{09C1D8E8-476C-49A3-9983-D3565F9E0E25}"
+	ProjectSection(SolutionItems) = preProject
+		azure-pipelines.yml = azure-pipelines.yml
 	EndProjectSection
 EndProject
 Global
@@ -42,6 +52,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{707375C5-6E16-41F1-A3AE-E7D8B05D35AC} = {C05D6070-566C-4602-98DC-64F7E492B641}
+		{FEBCB6DE-B66F-42F3-9937-A3D848A3DEAF} = {C05D6070-566C-4602-98DC-64F7E492B641}
+		{09C1D8E8-476C-49A3-9983-D3565F9E0E25} = {C05D6070-566C-4602-98DC-64F7E492B641}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {37870761-E1C8-4A3D-99C4-49F3380988AC}
