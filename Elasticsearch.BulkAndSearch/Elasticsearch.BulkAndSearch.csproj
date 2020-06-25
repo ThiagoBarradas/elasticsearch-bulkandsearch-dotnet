@@ -12,7 +12,15 @@
     <PackageIconUrl>https://i.imgur.com/lfWW74h.png</PackageIconUrl>
     <Description>Elasticsearch Bulk and Search is a high level library to make easy basic query operations (get, search and scroll) and index operations (single index or bulk), besides paging, sorting and query buider.</Description>
     <PackageId>Easy.Elasticsearch.BulkAndSearch</PackageId>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="NEST" Version="6.8.3" />
