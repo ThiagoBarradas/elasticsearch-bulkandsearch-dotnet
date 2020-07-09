@@ -22,9 +22,14 @@ namespace Elasticsearch.BulkAndSearch
 
                 return this.ElasticClient.Get(path)?.Source;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return null;
+                if (e.Message.Contains("404"))
+                {
+                    return null;
+                }
+
+                throw new OperationCanceledException("Invalid result on get", e);
             }
         }
 
@@ -41,13 +46,20 @@ namespace Elasticsearch.BulkAndSearch
                       .AllowNoIndices(true)
                       .AllowPartialSearchResults(true);
 
-            var elasticResponse = this.ElasticClient.Search<TEntity>(descriptor);
-            
-            return new SearchResult<TEntity>
+            try
             {
-                Total = elasticResponse.Total,
-                Items = elasticResponse.Documents
-            };
+                var elasticResponse = this.ElasticClient.Search<TEntity>(descriptor);
+
+                return new SearchResult<TEntity>
+                {
+                    Total = elasticResponse.Total,
+                    Items = elasticResponse.Documents
+                };
+            }
+            catch (Exception e)
+            {
+                throw new OperationCanceledException("Invalid result on search", e);
+            }
         }
 
         public ScrollResult<TEntity> Scroll(QueryContainer query, ScrollOptions scrollOptions, string index = null, string type = null)
@@ -57,7 +69,15 @@ namespace Elasticsearch.BulkAndSearch
             if (!string.IsNullOrWhiteSpace(scrollOptions.ScrollId))
             {
                 ScrollRequest scrollRequest = new ScrollRequest(scrollOptions.ScrollId, scrollOptions.Scroll);
-                elasticResponse = this.ElasticClient.Scroll<TEntity>(scrollRequest);
+
+                try
+                { 
+                    elasticResponse = this.ElasticClient.Scroll<TEntity>(scrollRequest);
+                }
+                catch (Exception e)
+                {
+                    throw new OperationCanceledException("Invalid result on scroll by id", e);
+                }
             }
             else
             {
@@ -72,7 +92,15 @@ namespace Elasticsearch.BulkAndSearch
                           .AllowNoIndices(true)
                           .AllowPartialSearchResults(true);
 
-                elasticResponse = this.ElasticClient.Search<TEntity>(descriptor);
+                try
+                { 
+                    elasticResponse = this.ElasticClient.Search<TEntity>(descriptor);
+                }
+                catch (Exception e)
+                {
+                    throw new OperationCanceledException("Invalid result on new scroll", e);
+                }
+
                 scrollOptions.ScrollId = elasticResponse.ScrollId;
             }
 
