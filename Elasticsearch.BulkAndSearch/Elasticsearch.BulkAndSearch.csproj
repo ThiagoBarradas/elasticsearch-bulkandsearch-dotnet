@@ -17,7 +17,7 @@
   <ItemGroup>
     <PackageReference Include="NEST" Version="6.8.3" />
     <PackageReference Include="NEST.JsonNetSerializer" Version="6.8.3" />
-    <PackageReference Include="PackUtils" Version="1.0.72" />
+    <PackageReference Include="PackUtils" Version="1.2.1" />
   </ItemGroup>
 
 </Project>
