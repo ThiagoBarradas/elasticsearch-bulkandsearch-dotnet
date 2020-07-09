@@ -30,6 +30,15 @@ namespace Elasticsearch.BulkAndSearch.Demo
             PersonCommand = new ElasticsearchCommand<Person>(elasticsearchOptions, Person.GenerateIndexName);
             PersonQuery = new ElasticsearchQuery<Person>(elasticsearchOptions);
 
+            try
+            {
+                PersonQuery.Get("zz");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
+
             // bulk
             Console.Write("Bulk:");
             var persons = new List<Person>
