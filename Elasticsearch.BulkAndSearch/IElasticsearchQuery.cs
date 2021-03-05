@@ -7,8 +7,8 @@ namespace Elasticsearch.BulkAndSearch
     {
         T Get(object id, string index = null, string type = null);
 
-        SearchResult<T> Search(QueryContainer query, SearchOptions searchOptions, string index = null, string type = null);
+        SearchResult<T> Search(QueryContainer query, SearchOptions searchOptions, string index = null, string type = null, FieldsFilter fieldsFilter = null);
 
-        ScrollResult<T> Scroll(QueryContainer query, ScrollOptions scrollOptions, string index = null, string type = null);
+        ScrollResult<T> Scroll(QueryContainer query, ScrollOptions scrollOptions, string index = null, string type = null, FieldsFilter fieldsFilter = null);
     }
 }

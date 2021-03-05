@@ -1,5 +1,6 @@
 ﻿using Elasticsearch.BulkAndSearch.Models;
 using Nest;
+using System.Linq;
 
 namespace Elasticsearch.BulkAndSearch.Helpers
 {
@@ -52,6 +53,29 @@ namespace Elasticsearch.BulkAndSearch.Helpers
             }
 
             return descriptor;
+        }
+
+        public static SearchDescriptor<T> AddFieldsFilter<T>(this SearchDescriptor<T> descriptor, FieldsFilter fieldsFilter) where T : class
+        {
+            if (fieldsFilter == null)
+            {
+                return descriptor;
+            }
+
+            return descriptor.Source(s =>
+            {
+                if (fieldsFilter.HasFieldsToInclude)
+                {
+                    s.Includes(i => i.Fields(fieldsFilter.ToInclude.ToArray()));
+                }
+
+                if (fieldsFilter.HasFieldsToExclude)
+                {
+                    s.Excludes(e => e.Fields(fieldsFilter.ToExclude.ToArray()));
+                }
+
+                return s;
+            });
         }
     }
 }

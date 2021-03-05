@@ -33,7 +33,7 @@ namespace Elasticsearch.BulkAndSearch
             }
         }
 
-        public SearchResult<TEntity> Search(QueryContainer query, SearchOptions searchOptions, string index = null, string type = null)
+        public SearchResult<TEntity> Search(QueryContainer query, SearchOptions searchOptions, string index = null, string type = null, FieldsFilter fieldsFilter = null)
         {
             SearchDescriptor<TEntity> descriptor = new SearchDescriptor<TEntity>();
 
@@ -42,6 +42,7 @@ namespace Elasticsearch.BulkAndSearch
                       .AddQuery(query)
                       .AddPaging(searchOptions)
                       .AddSorting(searchOptions)
+                      .AddFieldsFilter(fieldsFilter)
                       .IgnoreUnavailable(true)
                       .AllowNoIndices(true)
                       .AllowPartialSearchResults(true);
@@ -62,7 +63,7 @@ namespace Elasticsearch.BulkAndSearch
             }
         }
 
-        public ScrollResult<TEntity> Scroll(QueryContainer query, ScrollOptions scrollOptions, string index = null, string type = null)
+        public ScrollResult<TEntity> Scroll(QueryContainer query, ScrollOptions scrollOptions, string index = null, string type = null, FieldsFilter fieldsFilter = null)
         {
             ISearchResponse<TEntity> elasticResponse = null;
 
@@ -88,6 +89,7 @@ namespace Elasticsearch.BulkAndSearch
                           .AddQuery(query)
                           .AddScroll(scrollOptions)
                           .AddSorting(scrollOptions)
+                          .AddFieldsFilter(fieldsFilter)
                           .IgnoreUnavailable(true)
                           .AllowNoIndices(true)
                           .AllowPartialSearchResults(true);
