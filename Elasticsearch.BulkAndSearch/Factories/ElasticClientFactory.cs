@@ -1,18 +1,22 @@
-﻿using Elasticsearch.BulkAndSearch.Models;
+﻿using Elasticsearch.BulkAndSearch.Helpers;
+using Elasticsearch.BulkAndSearch.Models;
 using Elasticsearch.Net;
 using Nest;
 using Nest.JsonNetSerializer;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using PackUtils;
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 
 namespace Elasticsearch.BulkAndSearch.Factories
 {
     public static class ElasticClientFactory
     {
-        public static JsonSerializerSettings JsonSerializerSettings = JsonUtility.SnakeCaseJsonSerializerSettings;
+        private static JsonSerializerSettings _snakeCaseJsonSerializerSettings;
+
+        public static JsonSerializerSettings JsonSerializerSettings = JsonHelper.SnakeCaseJsonSerializerSettings;
 
         public static NamingStrategy NamingStrategy = new SnakeCaseNamingStrategy();
 
