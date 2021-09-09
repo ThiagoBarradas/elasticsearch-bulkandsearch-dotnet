@@ -142,5 +142,50 @@ namespace Elasticsearch.BulkAndSearch.Tests.Helpers
             var resultAsString = SerializeUtil.Serialize(descriptor);
             Assert.Equal("{}", resultAsString);
         }
+
+        [Fact]
+        public static void AddFieldsFilter_Should_Add_WithFields_When_Param_Is_NotNull()
+        {
+            // arrange
+            var descriptor = new SearchDescriptor<object>();
+            var fieldsFilter = FieldsFilter.WithFields(new[] { "name" });
+
+            // act
+            descriptor.AddFieldsFilter(fieldsFilter);
+
+            // assert
+            var resultAsString = SerializeUtil.Serialize(descriptor);
+            Assert.Equal("{\"_source\":{\"includes\":[\"name\"]}}", resultAsString);
+        }
+
+        [Fact]
+        public static void AddFieldsFilter_Should_Add_WithoutFields_When_Param_Is_NotNull()
+        {
+            // arrange
+            var descriptor = new SearchDescriptor<object>();
+            var fieldsFilter = FieldsFilter.WithoutFields(new[] { "name" });
+
+            // act
+            descriptor.AddFieldsFilter(fieldsFilter);
+
+            // assert
+            var resultAsString = SerializeUtil.Serialize(descriptor);
+            Assert.Equal("{\"_source\":{\"excludes\":[\"name\"]}}", resultAsString);
+        }
+
+        [Fact]
+        public static void AddFieldsFilter_Should_Not_Add_When_Param_Is_Null()
+        {
+            // arrange
+            var descriptor = new SearchDescriptor<object>();
+            FieldsFilter fieldsFilter = null;
+
+            // act
+            descriptor.AddFieldsFilter(fieldsFilter);
+
+            // assert
+            var resultAsString = SerializeUtil.Serialize(descriptor);
+            Assert.Equal("{}", resultAsString);
+        }
     }
 }
