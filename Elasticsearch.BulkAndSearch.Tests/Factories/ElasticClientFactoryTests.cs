@@ -27,7 +27,6 @@ namespace Elasticsearch.BulkAndSearch.Tests.Factories
             {
                 DefaultIndexName = "index-d",
                 User = "user",
-                Environment = "my-env",
                 MaximumRetries = 4,
                 ReadUrl = "http://esread:9200",
                 WriteUrl = "http://eswrite:9200",
@@ -42,7 +41,6 @@ namespace Elasticsearch.BulkAndSearch.Tests.Factories
             Assert.Equal("index-d", client.ConnectionSettings.DefaultIndex);
             Assert.Equal(30, client.ConnectionSettings.RequestTimeout.TotalSeconds);
             Assert.Equal(4, client.ConnectionSettings.MaxRetries);
-            Assert.Equal("my-env", client.ConnectionSettings.Headers.Get("Environment"));
             Assert.Equal("http://esread:9200/", client.ConnectionSettings.ConnectionPool.Nodes.First().Uri.AbsoluteUri);
         }
 
@@ -53,7 +51,6 @@ namespace Elasticsearch.BulkAndSearch.Tests.Factories
             ElasticsearchOptions options = new ElasticsearchOptions
             {
                 DefaultIndexName = "index-d",
-                Environment = "my-env",
                 MaximumRetries = 4,
                 ReadUrl = "http://esread:9200",
                 WriteUrl = "http://eswrite:9200",
@@ -67,7 +64,6 @@ namespace Elasticsearch.BulkAndSearch.Tests.Factories
             Assert.Equal("index-d", client.ConnectionSettings.DefaultIndex);
             Assert.Equal(30, client.ConnectionSettings.RequestTimeout.TotalSeconds);
             Assert.Equal(4, client.ConnectionSettings.MaxRetries);
-            Assert.Equal("my-env", client.ConnectionSettings.Headers.Get("Environment"));
             Assert.Equal("http://eswrite:9200/", client.ConnectionSettings.ConnectionPool.Nodes.First().Uri.AbsoluteUri);
         }
     }

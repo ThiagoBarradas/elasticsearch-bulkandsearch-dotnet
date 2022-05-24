@@ -15,7 +15,6 @@ namespace Elasticsearch.BulkAndSearch.Tests.TestUtilities
             return new ElasticsearchOptions
             {
                 DefaultIndexName = "my-index",
-                Environment = "my-env",
                 MaximumRetries = 4,
                 ReadUrl = "http://esread:9200",
                 WriteUrl = "http://eswrite:9200",
@@ -32,8 +31,6 @@ namespace Elasticsearch.BulkAndSearch.Tests.TestUtilities
         public static string LastProcessedIndex { get; set; }
 
         public static List<Person> LastProcessedPersons { get; set; }
-
-        public static List<string> LastProcessedIndexes { get; set; }
 
         public static string LastQueryBody { get; set; }
 
