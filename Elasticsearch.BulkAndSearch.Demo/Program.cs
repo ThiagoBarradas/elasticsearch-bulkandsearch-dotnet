@@ -20,11 +20,11 @@ namespace Elasticsearch.BulkAndSearch.Demo
             {
                 WriteUrl = "http://localhost:9200",
                 ReadUrl = "http://localhost:9200",
-                DefaultTypeName = "docs",
-                DefaultIndexName = "my-index",
+                DefaultIndexName = "my-index-barradas",
                 TimeoutInSeconds = 60,
                 MaximumRetries = 5,
-                Environment = "MyServer"
+                User = "user",
+                Pass = "pass"
             };
 
             PersonCommand = new ElasticsearchCommand<Person>(elasticsearchOptions, Person.GenerateIndexName);
@@ -55,7 +55,7 @@ namespace Elasticsearch.BulkAndSearch.Demo
 
             // upsert
             Console.WriteLine("Upsert:");
-            var otherPerson = new Person { Id = "2", Name = "Rafael Barradas", Age = 25, CreateDate = new DateTime(2018, 12, 01) };
+            var otherPerson = new Person { Id = "2", Name = "Rafael Tests", Age = 25, CreateDate = new DateTime(2018, 12, 01) };
 
             Console.WriteLine(otherPerson.Name);
             PersonCommand.Upsert(otherPerson);

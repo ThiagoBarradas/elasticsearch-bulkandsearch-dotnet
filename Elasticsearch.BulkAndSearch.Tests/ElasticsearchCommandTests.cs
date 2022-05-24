@@ -13,7 +13,7 @@ namespace Elasticsearch.BulkAndSearch.Tests
             // arrage
             var options = ElasticClientMock.GetOptions();
             var command = new ElasticsearchCommand<Person>(options, null);
-            command.ElasticClient = ElasticClientMock.GetElasticClientMock(options, null, null, null);
+            command.ElasticClient = ElasticClientMock.GetElasticClientMock(options, null, null, null, null);
             var person = new Person { Id = "1", Name = "Thiago Barradas", Age = 27, CreateDate = new DateTime(2019, 01, 01) };
 
             // act
@@ -33,7 +33,7 @@ namespace Elasticsearch.BulkAndSearch.Tests
             // arrage
             var options = ElasticClientMock.GetOptions();
             var command = new ElasticsearchCommand<Person>(options, Person.GenerateIndexName);
-            command.ElasticClient = ElasticClientMock.GetElasticClientMock(options, Person.GenerateIndexName, null, null);
+            command.ElasticClient = ElasticClientMock.GetElasticClientMock(options, Person.GenerateIndexName, null, null, null);
             var person = new Person { Id = "1", Name = "Thiago Barradas", Age = 27, CreateDate = new DateTime(2019, 01, 01) };
 
             // act
@@ -53,12 +53,13 @@ namespace Elasticsearch.BulkAndSearch.Tests
             // arrage
             var options = ElasticClientMock.GetOptions();
             var command = new ElasticsearchCommand<Person>(options, null);
-            command.ElasticClient = ElasticClientMock.GetElasticClientMock(options, null, null, null);
+            
             var persons = new List<Person>
             {
                 { new Person { Id = "1", Name = "Thiago Barradas", Age = 27, CreateDate = new DateTime(2019, 01, 01) } },
                 { new Person { Id = "2", Name = "Raphael Barradas", Age = 29, CreateDate = new DateTime(2018, 12, 01) } }
             };
+            command.ElasticClient = ElasticClientMock.GetElasticClientMock(options, null, null, persons, null);
 
             // act
             var result = command.Bulk(persons);
@@ -66,8 +67,6 @@ namespace Elasticsearch.BulkAndSearch.Tests
             // assert
             Assert.True(result.IsValid);
             Assert.Equal("Bulk", ElasticClientMock.LastElasticClientAction);
-            Assert.Equal(options.DefaultIndexName, ElasticClientMock.LastProcessedIndexes[0]);
-            Assert.Equal(options.DefaultIndexName, ElasticClientMock.LastProcessedIndexes[1]);
             Assert.Equal(persons[0].Id, ElasticClientMock.LastProcessedPersons[0].Id);
             Assert.Equal(persons[0].Name, ElasticClientMock.LastProcessedPersons[0].Name);
             Assert.Equal(persons[1].Id, ElasticClientMock.LastProcessedPersons[1].Id);
@@ -80,13 +79,15 @@ namespace Elasticsearch.BulkAndSearch.Tests
             // arrage
             var options = ElasticClientMock.GetOptions();
             var command = new ElasticsearchCommand<Person>(options, Person.GenerateIndexName);
-            command.ElasticClient = ElasticClientMock.GetElasticClientMock(options, Person.GenerateIndexName, null, null);
-
+            
             var persons = new List<Person>
             {
                 { new Person { Id = "1", Name = "Thiago Barradas", Age = 27, CreateDate = new DateTime(2019, 01, 01) } },
                 { new Person { Id = "2", Name = "Raphael Barradas", Age = 29, CreateDate = new DateTime(2018, 12, 01) } }
             };
+            command.ElasticClient = ElasticClientMock.GetElasticClientMock(options, Person.GenerateIndexName, null, persons, null);
+
+           
 
             // act
             var result = command.Bulk(persons);
@@ -94,8 +95,6 @@ namespace Elasticsearch.BulkAndSearch.Tests
             // assert
             Assert.True(result.IsValid);
             Assert.Equal("Bulk", ElasticClientMock.LastElasticClientAction);
-            Assert.Equal(options.DefaultIndexName+"-2019-01", ElasticClientMock.LastProcessedIndexes[0]);
-            Assert.Equal(options.DefaultIndexName+"-2018-12", ElasticClientMock.LastProcessedIndexes[1]);
             Assert.Equal(persons[0].Id, ElasticClientMock.LastProcessedPersons[0].Id);
             Assert.Equal(persons[0].Name, ElasticClientMock.LastProcessedPersons[0].Name);
             Assert.Equal(persons[1].Id, ElasticClientMock.LastProcessedPersons[1].Id);

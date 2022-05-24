@@ -14,25 +14,24 @@ namespace Elasticsearch.BulkAndSearch
             : base(ConnectionMode.Write, options, generateIndexName)
         { }
 
-        public IBulkResponse Bulk(IEnumerable<TEntity> documents, string type = null)
+        public BulkResponse Bulk(IEnumerable<TEntity> documents)
         {
             BulkDescriptor descriptor = new BulkDescriptor();
             foreach (var document in documents)
             {
                 descriptor.Index<object>(i => i
                     .Index(this.GetIndexName(document))
-                    .Type(type ?? this.Options.DefaultTypeName)
                     .Document(document));
             }
 
             return this.ElasticClient.Bulk(descriptor);
         }
 
-        public bool Upsert(TEntity document, string type = null, Refresh refresh = Refresh.False)
+        public bool Upsert(TEntity document, Refresh refresh = Refresh.False)
         {
             var index = this.GetIndexName(document);
             return this.ElasticClient.Index((object) document, i => 
-                i.Index(index).Type(type ?? this.Options.DefaultTypeName).Refresh(refresh)).IsValid;
+                i.Index(index).Refresh(refresh)).IsValid;
         }
     }
 }

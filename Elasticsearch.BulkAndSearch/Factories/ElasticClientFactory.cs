@@ -46,14 +46,16 @@ namespace Elasticsearch.BulkAndSearch.Factories
                 .GlobalHeaders(headersCollection)
                 .ThrowExceptions();
 
+            
+            
             if (!string.IsNullOrWhiteSpace(options.DefaultIndexName))
             {
                 connectionSettings.DefaultIndex(options.DefaultIndexName);
             }
 
-            if (!string.IsNullOrWhiteSpace(options.DefaultTypeName))
+            if (!string.IsNullOrWhiteSpace(options.User))
             {
-                connectionSettings.DefaultTypeName(options.DefaultTypeName);
+                connectionSettings.BasicAuthentication(options.User, options.Pass);
             }
 
             return new ElasticClient(connectionSettings);

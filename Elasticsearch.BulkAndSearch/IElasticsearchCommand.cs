@@ -6,8 +6,8 @@ namespace Elasticsearch.BulkAndSearch
 {
     public interface IElasticsearchCommand<TEntity> where TEntity : class
     {
-        bool Upsert(TEntity document, string type = null, Refresh refresh = Refresh.False);
+        bool Upsert(TEntity document, Refresh refresh = Refresh.False);
 
-        IBulkResponse Bulk(IEnumerable<TEntity> documents, string type = null);
+        BulkResponse Bulk(IEnumerable<TEntity> documents);
     }
 }

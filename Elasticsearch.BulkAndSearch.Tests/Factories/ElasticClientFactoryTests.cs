@@ -26,7 +26,7 @@ namespace Elasticsearch.BulkAndSearch.Tests.Factories
             ElasticsearchOptions options = new ElasticsearchOptions
             {
                 DefaultIndexName = "index-d",
-                DefaultTypeName = "type-d",
+                User = "user",
                 Environment = "my-env",
                 MaximumRetries = 4,
                 ReadUrl = "http://esread:9200",
@@ -38,7 +38,7 @@ namespace Elasticsearch.BulkAndSearch.Tests.Factories
             var client = ElasticClientFactory.GetInstance(ConnectionMode.Read, options);
 
             // assert
-            Assert.Equal("type-d", client.ConnectionSettings.DefaultTypeName);
+            Assert.Equal("user", client.ConnectionSettings.BasicAuthenticationCredentials.Username);
             Assert.Equal("index-d", client.ConnectionSettings.DefaultIndex);
             Assert.Equal(30, client.ConnectionSettings.RequestTimeout.TotalSeconds);
             Assert.Equal(4, client.ConnectionSettings.MaxRetries);
@@ -53,7 +53,6 @@ namespace Elasticsearch.BulkAndSearch.Tests.Factories
             ElasticsearchOptions options = new ElasticsearchOptions
             {
                 DefaultIndexName = "index-d",
-                DefaultTypeName = "type-d",
                 Environment = "my-env",
                 MaximumRetries = 4,
                 ReadUrl = "http://esread:9200",
@@ -65,7 +64,6 @@ namespace Elasticsearch.BulkAndSearch.Tests.Factories
             var client = ElasticClientFactory.GetInstance(ConnectionMode.Write, options);
 
             // assert
-            Assert.Equal("type-d", client.ConnectionSettings.DefaultTypeName);
             Assert.Equal("index-d", client.ConnectionSettings.DefaultIndex);
             Assert.Equal(30, client.ConnectionSettings.RequestTimeout.TotalSeconds);
             Assert.Equal(4, client.ConnectionSettings.MaxRetries);
