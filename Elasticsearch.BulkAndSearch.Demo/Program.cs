@@ -18,13 +18,13 @@ namespace Elasticsearch.BulkAndSearch.Demo
             // init
             var elasticsearchOptions = new ElasticsearchOptions
             {
-                WriteUrl = "https://search-credit-tests01-dev-tgn4l5zar56ngfpnipjloelusi.us-east-1.es.amazonaws.com",
-                ReadUrl = "https://search-credit-tests01-dev-tgn4l5zar56ngfpnipjloelusi.us-east-1.es.amazonaws.com/_cat/indices",
+                WriteUrl = "http://localhost:9200",
+                ReadUrl = "http://localhost:9200",
                 DefaultIndexName = "my-index-barradas2",
                 TimeoutInSeconds = 60,
                 MaximumRetries = 5,
-                User = "credit-dev",
-                Pass = "El4st1c!2"
+                User = "user",
+                Pass = "user"
             };
 
             PersonCommand = new ElasticsearchCommand<Person>(elasticsearchOptions, Person.GenerateIndexName);
