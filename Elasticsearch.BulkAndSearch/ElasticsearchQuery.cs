@@ -17,7 +17,6 @@ namespace Elasticsearch.BulkAndSearch
             try
             {
                 DocumentPath<TEntity> path = new DocumentPath<TEntity>(id.ToString())
-                    .Type(type ?? this.Options.DefaultTypeName)
                     .Index(index ?? this.Options.DefaultIndexName);
 
                 return this.ElasticClient.Get(path)?.Source;
@@ -38,7 +37,6 @@ namespace Elasticsearch.BulkAndSearch
             SearchDescriptor<TEntity> descriptor = new SearchDescriptor<TEntity>();
 
             descriptor.Index(index ?? $"{this.Options.DefaultIndexName}*")
-                      .Type(type ?? this.Options.DefaultTypeName)
                       .AddQuery(query)
                       .AddPaging(searchOptions)
                       .AddSorting(searchOptions)
@@ -85,7 +83,6 @@ namespace Elasticsearch.BulkAndSearch
                 SearchDescriptor<TEntity> descriptor = new SearchDescriptor<TEntity>();
 
                 descriptor.Index(index ?? $"{this.Options.DefaultIndexName}*")
-                          .Type(this.Options.DefaultTypeName)
                           .AddQuery(query)
                           .AddScroll(scrollOptions)
                           .AddSorting(scrollOptions)

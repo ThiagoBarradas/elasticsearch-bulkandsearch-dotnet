@@ -29,10 +29,6 @@ namespace Elasticsearch.BulkAndSearch.Factories
 
             var uri = (mode == ConnectionMode.Write) ? options.WriteUrl : options.ReadUrl;
             var connectionPool = new SingleNodeConnectionPool(new Uri(uri));
-            var headersCollection = new NameValueCollection
-            {
-                { nameof(options.Environment), options.Environment }
-            };
 
             var connectionSettings = new ConnectionSettings(
                 connectionPool,
@@ -43,17 +39,18 @@ namespace Elasticsearch.BulkAndSearch.Factories
                     resolver => resolver.NamingStrategy = NamingStrategy))
                 .RequestTimeout(TimeSpan.FromSeconds(options.TimeoutInSeconds))
                 .MaximumRetries(options.MaximumRetries)
-                .GlobalHeaders(headersCollection)
                 .ThrowExceptions();
 
+            
+            
             if (!string.IsNullOrWhiteSpace(options.DefaultIndexName))
             {
                 connectionSettings.DefaultIndex(options.DefaultIndexName);
             }
 
-            if (!string.IsNullOrWhiteSpace(options.DefaultTypeName))
+            if (!string.IsNullOrWhiteSpace(options.User))
             {
-                connectionSettings.DefaultTypeName(options.DefaultTypeName);
+                connectionSettings.BasicAuthentication(options.User, options.Pass);
             }
 
             return new ElasticClient(connectionSettings);

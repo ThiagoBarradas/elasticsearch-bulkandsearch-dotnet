@@ -39,10 +39,10 @@ var elasticsearchOptions = new ElasticsearchOptions
     WriteUrl = "http://localhost:9200",
     ReadUrl = "http://localhost:9200",
     DefaultTypeName = "docs",
-    DefaultIndexName = "my-index",
     TimeoutInSeconds = 60,
     MaximumRetries = 5,
-    Environment = "MyServer"
+    User = "user",
+    Pass = "pass"
 };
 
 IElasticsearchCommand<Person> PersonCommand = new ElasticsearchCommand<Person>(elasticsearchOptions, Person.GenerateIndexName);
